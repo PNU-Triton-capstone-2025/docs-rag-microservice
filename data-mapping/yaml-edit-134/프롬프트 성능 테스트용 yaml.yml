@@ -6,7 +6,7 @@ metadata:
     app: gift-service
     project: gift-service
     tier: backend
-data:
+stringData:
   JWT_SECRET: WW4ya2ppYmRkRkFXdG5QSjJBRmxMOFdYbW9oSk1DdmlnUWdnYUV5cGE1RT0=
   KAKAO_CLIENT_ID: YWMyMGQ4NGY5N2I2NzlmMGJiZDlhODA2NWJhODIzZjM=
   KAKAO_CLIENT_SECRET: RnczSmlMNVBrcGV2WFZaOU9pVk04YmZiZ0hVUEQ1RUE=
@@ -25,8 +25,8 @@ data:
   SERVICE_PRODUCT_URI: http://product-service-svc:8081
   SERVICE_WISH_URI: http://wish-service-svc:8082
   SERVICE_ORDER_URI: http://order-service-svc:8083
-  KAKAO_REDIRECT_URI: http://localhost:8080/members/login/oauth2/code/kakao
-  FRONT_DOMAIN: http://localhost:8080
+  KAKAO_REDIRECT_URI: http://localhost:8080/members/login/oauth/code/kakao
+  FRONT_DOMAIN: http://localhost:8085
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -261,11 +261,6 @@ spec:
             configMapKeyRef:
               name: gift-config
               key: SERVICE_PRODUCT_URI
-        - name: SERVICE_WISH_URI
-          valueFrom:
-            configMapKeyRef:
-              name: gift-config
-              key: SERVICE_WISH_URI
         - name: SERVICE_USER_URI
           valueFrom:
             configMapKeyRef:
@@ -354,11 +349,6 @@ spec:
             secretKeyRef:
               name: gift-secret
               key: KAKAO_CLIENT_ID
-        - name: KAKAO_CLIENT_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: gift-secret
-              key: KAKAO_CLIENT_SECRET
         resources:
           requests:
             cpu: "100m"
